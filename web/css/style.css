@@ -59,7 +59,7 @@ body {
 	min-width: 1000px;
 	min-height: 100%;
 	height: auto !important;
-	height: 100%;
+	padding-bottom: 20px;
 }
 
 
@@ -83,19 +83,77 @@ h1 .header {
 -----------------------------------------------------------------------------*/
 .content {
 	padding: 20px 20px 100px;
+	width: 100%;
+	display: inline-block;
+	white-space: normal;
+	vertical-align: middle;
+	text-align: center;
+	&:before {
+		display: inline-block;
+		vertical-align: middle;
+		content: '';
+	}
+}
+.content button {
+	color: #fff;
+	background-color: #286090;
+	border-color: #204d74;
 }
 
 div.grid-view tr:hover td {
-	background:gray;
+	background: gray;
 	cursor: pointer;
+}
+
+div.grid-view th {
+	text-align: center;
+}
+
+div.detail-view {
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: middle;
+	text-align: center;
+	width: 60%;
+}
+
+div.detail-view th {
+	text-align: right;
+	font-weight: bold;
+}
+
+div.detail-view td {
+	white-space: normal;
+}
+
+div.add-form {
+	display: inline-block;
+	white-space: nowrap;
+	vertical-align: middle;
+	text-align: center;
+	width: 60%;	
+}
+
+div.add-form label {
+	text-align: right;
+	font-weight: bold;
+}
+
+div.right {
+	float: right;
+	padding-bottom: 20px;
+}
+
+div.left {
+	float: left;
 }
 
 /* Footer
 -----------------------------------------------------------------------------*/
 .footer {
-	margin: -100px auto 0;
+	margin: 0 auto 0;
 	min-width: 1000px;
-	height: 50px;
+	height: 30px;
 	background: #BFF08E;
 	position: relative;
 }

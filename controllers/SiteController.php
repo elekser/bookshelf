@@ -10,13 +10,13 @@ use yii\filters\VerbFilter;
 use yii\data\Pagination;
 use yii\data\ActiveDataProvider;
 use app\models\Books;
-//use app\models\ContactForm;
 
 class SiteController extends Controller
 {
     /**
      * {@inheritdoc}
      */
+/*
     public function behaviors()
     {
         return [
@@ -39,7 +39,7 @@ class SiteController extends Controller
             ],
         ];
     }
-
+*/
     /**
      * {@inheritdoc}
      */
@@ -87,7 +87,22 @@ class SiteController extends Controller
      */
     public function actionShowBook($id)
     {
-	//$bookID = Yii::$app->request->get('id');
         return $this->render('showbook',[ 'model' => Books::findOne($id)]);
+    }
+
+    /**
+     * Add book in catalog.
+     *
+     * @return string
+     */
+    public function actionAddBook()
+    {
+	$model = new Books;
+	if ( $model->load(Yii::$app->request->post()) and $model->validate() ) {
+		$model->save();
+		return Yii::$app->runAction('site/index');
+	} else {
+        	return $this->render('addbook',[ 'model' => new Books ]);
+	}    
     }
 }

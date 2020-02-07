@@ -7,14 +7,12 @@ use yii\grid\GridView;
 use yii\widgets\LinkPager;
 use yii\widgets\Pjax;
 
-/* js-script to call book info on row click */
-
-//$this->registerJs( 
-//	"$('#grid-view tr').on('click',function(){ var id = $(this).data('data-key');var url = '".Url::to(['site/show-book'],true)."?ID=';".
-//	"$(location).attr('href',url+id);})",
-//	yii\web\View::POS_READY,
-//	'row-js');
-
+?>
+<div class="site-index">
+    <div class="title">Список книг</div><div class="right"><?= Html::a('Добавить книгу',['site/add-book']) ?></div>
+    <div class="grid-view">
+    <?php Pjax::begin(); ?>
+<?php /* js-script to call book info on row click */
 $this->registerJs( "$('td').click( function (e) { ".
 	"var id = $(this).closest('tr').data('key'); if(e.target == this) location.href = '" .Url::to(['site/show-book']) ."&id=' + id;".
 	"});",
@@ -22,20 +20,12 @@ $this->registerJs( "$('td').click( function (e) { ".
 	'row-js');
 
 ?>
-<div class="site-index">
-    <div class="title">Список книг</div>
-    <div class="body-content">
-    <?php Pjax::begin(); ?>
 	<?= GridView::widget([
 	'dataProvider' => $bookshelf,
-	'columns' => [
-		[ 'attribute' => 'ID', 'label' =>'№ книги'],
-		[ 'attribute' => 'TITLE', 'label' => 'Название книги' ],
-		[ 'attribute' => 'authorFamily', 'label' =>'Автор', 
-			'value' => function ($data) { return $data->authorName.' '.$data->authorFamily; } ],
-		[ 'attribute' => 'ISBN', 'label' => 'ISBN' ]
-		],
-	'layout' => '{items}{summary}{pager}',
+	'columns' => [ 'ID','TITLE',
+		[ 'attribute' => 'authorFamily', 'value' => function ($data) { return $data->authorName.' '.$data->authorFamily; } ],
+		'STYLE', 'ISBN'],
+	'layout' => '{items}<div class="left">{summary}<br>{pager}</div>',
 	'summary' => 'Показаны записи <strong>{begin}-{end}</strong> из <strong>{totalCount}</strong>.'
 	]) ?>
 	<!-- LinkPager::widget(['pagination' => $pagination]) -->

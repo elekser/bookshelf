@@ -2,22 +2,22 @@
 /* @var $this yii\web\View */
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;	
 
 ?>
 <div class="book-info">
     <div class="title">Информация о книге</div>
-    <div class="body-content">
+    <div class="detail-view">
 	<?= DetailView::widget([
 	'model' => $model,
 	'attributes' => [
-		[ 'attribute' => 'ID', 'label' =>'№ книги'],
-		[ 'attribute' => 'TITLE', 'label' => 'Название книги' ],
+		'ID', 'TITLE',
 		[ 'attribute' => 'authorFamily', 'label' =>'Автор', 
 			'value' => function ($data) { return $data->authorName.' '.$data->authorFamily; } ],
-		[ 'attribute' => 'ISBN', 'label' => 'ISBN' ],
-		[ 'attribute' => 'DESCR', 'label' => 'Аннотация' ],
-		],
+		'ISBN','STYLE','DESCR'],
 	]) ?>
+	<center><?= Html::button('Вернуться на главную страницу',['class'=>'btn btn-primary','onClick'=>'location.href="'.Url::to(['site/index']).'"']); ?></center>
     </div>
 </div>
+
